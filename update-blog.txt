@@ -1,0 +1,87 @@
+# update-blog html page idi, gerek qalmadi
+
+
+
+{% extends 'base.html' %}
+
+<title>{% block title %}Pavshop - Edit Story{% endblock %}</title>
+
+
+
+
+
+{% block content %}
+
+
+
+<h2>Edit Story</h2>
+<form method="POST">
+    {% csrf_token %}
+    {{ edit_form.as_p }}
+    <button type="submit">Save</button>
+
+</form>
+
+
+<hr>
+
+<h3>Delete Story?</h3>
+<form method="POST">
+    {% csrf_token %}
+    {{ delete_form }}
+    <button type="submit">Delete</button>
+
+</form>
+
+
+{% endblock %}
+
+
+--------------------------------------------------
+# forms:
+
+class UpdateStoryForm(forms.ModelForm):
+    edit_story = forms.BooleanField(widget=forms.HiddenInput, initial=True)
+
+
+    class Meta:
+        model = Story
+        fields = ('title', 
+                  'content'
+        )
+
+
+
+
+--------------------------------------------------
+# views:  (edit idi adi)
+
+@login_required(login_url='login_page')
+def edit_blog_page(request, id):
+    story = get_object_or_404(Story, id=id)
+
+    edit_form = StoryForm(instance=story)
+    delete_form = DeleteStoryForm()
+
+    if request.method == "POST":
+        if 'edit_story' in request.POST:
+            edit_form = StoryForm(request.POST, instance=story)
+            if edit_form.is_valid():
+                edit_form.save()
+                return redirect('blog_list_page')
+        if 'delete_story' in request.POST:
+            print('yesssss')
+            delete_form = DeleteStoryForm(request.POST)
+            if delete_form.is_valid():
+                print('form is valid 2222222222222')
+                story.delete()
+                return redirect('blog_list_page')
+            
+
+    context = {
+        'edit_form' : edit_form,
+        'delete_form' : delete_form,
+    }
+
+    return render(request, 'edit-blog.html', context=context)
+

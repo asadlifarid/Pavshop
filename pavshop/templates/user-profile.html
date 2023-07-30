@@ -1,0 +1,112 @@
+{% extends 'base.html' %}
+
+
+<title>{% block title %}Pavshop - User Profile{% endblock %}</title>
+
+{% block content %}
+
+<!-- ADMIN info -->
+<div class="admin-info">
+  <div class="media-left">
+    
+   
+    
+    
+  </div>
+  <div class="media-body">
+
+
+    <!-- Add from here -->
+    {% if user.is_authenticated and backends.associated %}
+    {% for auth in backends.associated %}
+
+      {% if auth.provider == 'facebook' %}
+        <div class="col-md-6 text-center">
+            <img src="{{auth.extra_data.picture.data.url}}" alt="" width="150" height="150" style="border-radius: 50%">
+        </div>
+        <div class="col-md-6 social-container my-2">
+            <p>Signed in via: <strong>{{ auth.provider }}</strong></p>
+            <p>Name: <strong>{{ auth.extra_data.name }}</strong></p>
+            <p>Provider url: <strong><a href="{{auth.extra_data.profile_url}}">link</a></strong></p>
+
+            <p>You wrote <strong>{{ storys_count }}</strong> story!</p>
+
+            
+        </div>
+      {% endif %}
+
+      {% if auth.provider == 'google-oauth2' %}
+        <div class="col-md-6 text-center">
+            <img src="{{auth.extra_data.picture.url}}" alt="" width="150" height="150" style="border-radius: 50%">
+        </div>
+        <div class="col-md-6 social-container my-2">
+            <p>Signed in via: <strong>{{ auth.provider }}</strong></p>
+            <p>Name: <strong>{{ auth.extra_data.name }}</strong></p>
+            <p>Email: <strong>{{ auth.extra_data.email }}</strong></p>
+
+            <!-- <p>Name: <strong>{{ request.user.get_full_name }}</strong></p> -->
+            <!-- <p>Email: <strong>{{ request.user.email }}</strong></p> -->
+
+            <!-- <p>Provider url: <strong><a href="{{auth.extra_data.profile_url}}">link</a></strong></p> -->
+
+            <p>You wrote <strong>{{ storys_count }}</strong> story!</p>
+
+            
+        </div>
+      {% endif %}
+
+      {% if auth.provider == 'twitter' %}
+        <div class="col-md-6 text-center">
+            <img src="{{auth.extra_data.picture.data.url}}" alt="" width="150" height="150" style="border-radius: 50%">
+        </div>
+        <div class="col-md-6 social-container my-2">
+            <p>Signed in via: <strong>{{ auth.provider }}</strong></p>
+            <p>Name: <strong>{{ auth.extra_data.name }}</strong></p>
+            <p>Provider url: <strong><a href="{{auth.extra_data.profile_url}}">link</a></strong></p>
+
+            <p>You wrote <strong>{{ storys_count }}</strong> story!</p>
+
+            
+        </div>
+      {% endif %}
+
+
+    {% endfor %}
+
+
+    {% else %}
+    {% if user.is_authenticated and not backends.associated %}
+
+      <div class="admin-pic"> <img src="{{ request.user.get_avatar }}" alt=""> </div>
+        <h6>{{ request.user.get_full_name }}<span>{{ request.user.major }}</span></h6>
+        <!-- <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. NullamMorbi ac scelerisque mauris. Etiam sodales a nulla ornare viverra. Nunc at blandit neque, bociis natoque penatcing e scelerisque miscing elit. </p> -->
+        <ul>
+
+        <p><strong>Bio:</strong>  &nbsp{{ request.user.bio }}</p>
+        <p><strong>Gender:</strong>  &nbsp{{ request.user.get_gender_display }}</p>
+        
+        
+        <i><p><strong>Contact me:</strong> <span style="margin-left: 10px;"><a href="mailto:">{{ request.user.email }}</a></span></p></i>
+        
+        <p>You wrote <strong>{{ storys_count }}</strong> story!</p>
+       </ul>
+        
+
+        <div class="admin-social"> <a href="https://www.facebook.com/"><i class="icon-social-facebook"></i></a> <a href="#."><i class="icon-social-twitter"></i></a> <a href="#."><i class="icon-social-dribbble"></i></a> <a href="#."><i class="icon-envelope"></i></a> </div>
+      </div>
+      </div>
+      {% endif %}
+    {% endif %}
+
+
+
+
+
+
+
+
+
+
+
+
+{% endblock %}

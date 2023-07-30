@@ -1,0 +1,163 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+<title>{% block title %} Pavshop - Create Blog Page {% endblock %}</title>
+
+{% block content %}
+
+
+
+
+
+<!--======= USER  INFO  =========-->
+
+  <section class="padding-top-100 padding-bottom-100">
+    <div class="container">
+      <!-- {{form.media}} -->
+ 
+        <div class="row" style="display: flex;justify-content: space-between;">
+          <div class="col-md-8">
+          <h4>Create a Story</h4>
+          <form method="POST" id="storyCreationForm" class="w-100" enctype="multipart/form-data">
+           
+          
+            <div class="form-group">
+              <label for="">Title</label>
+              <input type="text" name="title" id="" class="form-control" value="">
+             
+              <!-- {{ form.title }}
+              {{ form.title.errors }} -->
+
+            </div>
+            
+            <div class="form-group">
+              <select name="category" class="form-control">
+              
+              </select>
+
+              <!-- {{ form.category }}
+              {{ form.category.errors }} -->
+
+            </div>
+
+
+            <div class="form-group">
+              <select name="tag" multiple id="" class="form-control">
+                
+              </select>
+
+              <!-- {{ form.tag }}
+              {{ form.tag.errors }} -->
+
+            </div>
+            
+          </div>
+          <div class="col-md-4 " style="margin-top: 30px;">
+            <div class="form-group">
+              <label for="">Description</label>
+              <input type="text" name="description" id="" class="form-control">
+              <!-- {{ form.description }}
+              {{ form.description.errors }} -->
+              
+            </div>
+            <div class="form-group">
+              <input type="file" name="image" id="" class="form-control">
+              <!-- {{ form.image.label_tag }}
+              {{ form.image }}
+              {{ form.errors }} -->
+            
+              
+            </div>
+            <div class="form-group" style="margin: 20px 0;display: flex; align-items: center;">
+              <input type="checkbox" id="" name="is_archive" class="">
+              <label for="" style="margin-left: 15px;margin-top: 5px;">Archive</label>
+
+              <!-- {{ form.is_archive }} Archive -->
+
+            </div>
+            <div class="form-group">
+              <label for="">Content</label>
+              <textarea name="content" class="form-control" id=""></textarea>
+              <!-- {{ form.content }}
+              {{ form.content.errors }} -->
+            </div>
+            <div class="col-md-12" style="margin-top: 30px;">
+              <button type="submit" name="continue" class="btn">continue</button>
+            </div>
+            </div>
+          
+
+            
+
+           
+            
+
+
+                
+              
+            </form>
+            </div>
+         
+            
+              
+                      
+             
+          <div class="col-md-2 ">
+            <h6>User Profile</h6>
+
+            {% if backends.associated %}
+             {% for auth in backends.associated %}
+
+                  {% if auth.provider == 'facebook' %}
+                    <div class="col-md-6 text-center">
+                        <img src="{{auth.extra_data.picture.data.url}}" alt="" width="150" height="150" style="border-radius: 50%">
+                    </div>
+                    <div class="col-md-6 social-container my-2 text-center d-flex flex-column align-items-center" >
+                        <p style="text-align: center !important;">Signed in via: <strong>{{ auth.provider }}</strong></p>
+                        <p style="text-align: center !important;">Name: <strong>{{ auth.extra_data.name }}</strong></p>
+                        <p style="text-align: center !important;">Email: <strong>{{ auth.extra_data.email }}</strong></p>
+
+                        <!-- <p>Provider url: <strong><a href="{{auth.extra_data.profile_url}}">link</a></strong></p> -->
+                    </div>
+                  {% endif %}
+
+                {% endfor %}
+
+            {% else %}
+
+
+
+                <div class="col-md-3 border-right">
+                    <div class="d-flex flex-column align-items-center text-center p-3 py-5"><img class="rounded-circle mt-5" width="150px" src="{{ request.user.get_avatar }}"><span class="font-weight-bold">{{ request.user.first_name }}</span>
+                        <span class="font-weight-bold">{{ request.user.last_name }}</span>
+                        <br>
+                        <span class="text-black-50">{{ request.user.email }}</span>
+                    </div>
+                </div>
+          {% endif %}
+          </div>
+        </div>
+       
+
+
+          <!--   Profile   -->
+        
+    </div>
+  </section>
+
+
+
+
+{% endblock %}
+
+
+
+{% block js %}
+
+<script type="text/javascript" src="{% static 'js/create.js' %}"></script>
+<!-- <script type="text/javascript" src="{% static 'js/login.js' %}"></script> -->
+
+
+
+{% endblock %}

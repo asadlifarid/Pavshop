@@ -1,0 +1,413 @@
+{% extends 'base.html' %}
+
+
+{% load static %}
+
+{% load i18n %}
+
+{% block content %}
+
+
+<title>{% block title %}PAVSHOP - Checkout Page{% endblock %}</title>
+
+
+  <!--======= SUB BANNER =========-->
+  <section class="sub-bnr" data-stellar-background-ratio="0.5">
+    <div class="position-center-center">
+      <div class="container">
+        <h4>{% trans 'CHECKOUT' %}</h4>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec faucibus maximus vehicula. 
+          Sed feugiat, tellus vel tristique posuere, diam</p>
+        <ol class="breadcrumb">
+          <li><a href="#">Home</a></li>
+          <li><a href="#">SHOP</a></li>
+          <li class="active">CHECKOUT</li>
+        </ol>
+      </div>
+    </div>
+  </section>
+  
+  <!-- Content -->
+  <div id="content"> 
+    
+    <!--======= PAGES INNER =========-->
+    <section class="chart-page padding-top-100 padding-bottom-100">
+      <div class="container"> 
+        
+        <!-- Payments Steps -->
+        <div class="shopping-cart"> 
+          
+          <!-- SHOPPING INFORMATION -->
+          <div class="cart-ship-info">
+            <div class="row"> 
+              
+              <!-- ESTIMATE SHIPPING & TAX -->
+              <div class="col-sm-7">
+                <h6>{% trans 'BILLING DETAILS' %}</h6>
+                
+                <form method="POST" id="bill-form">
+                  {% csrf_token %}
+                  <ul class="row" id="billing-info">
+                    
+                    <!-- Name -->
+                    <li class="col-md-6">
+                      <label> *{% trans 'FIRST NAME' %}
+                        <input type="text" name="first-name" value=" {{ request.user.first_name }}" placeholder="" disabled>
+                       
+                      </label>
+                    </li>
+                    <!-- LAST NAME -->
+                    <li class="col-md-6">
+                      <label> *{% trans 'LAST NAME' %}
+                        <!-- <input type="text" name="last-name" value="" placeholder=""> -->
+                        <input type="text" name="last-name" value=" {{ request.user.last_name }}" placeholder="" disabled>
+
+                        
+                      </label>
+                    </li>
+                    <li class="col-md-6"> 
+                      <!-- COMPANY NAME -->
+                      <label>{% trans 'COMPANY NAME' %}
+                        <!-- <input type="text" name="company" value="" placeholder=""> -->
+                        {{ billform.company }}
+                      </label>
+                    </li>
+                    <li class="col-md-6"> 
+                      <!-- ADDRESS -->
+                      <label>*{% trans 'ADDRESS' %}
+                        <!-- <input type="text" name="address" value="" placeholder=""> -->
+                        {{ billform.address }}
+                      </label>
+                    </li>
+                    <!-- TOWN/CITY -->
+                    <li class="col-md-6">
+                      <label>*{% trans 'TOWN/CITY' %}
+                        <!-- <input type="text" name="town" value="" placeholder=""> -->
+                        {{ billform.city }}
+                      </label>
+                    </li>
+                    
+                    <!-- COUNTRY -->
+                    <li class="col-md-6">
+                      <label> {% trans 'COUNTRY' %}
+                        <!-- <input type="text" name="contry-state" value="" placeholder=""> -->
+                        {{ billform.country }}
+                      </label>
+                    </li>
+                    
+                    <!-- EMAIL ADDRESS -->
+                    <li class="col-md-6">
+                      <label> *{% trans 'EMAIL ADDRESS' %}
+                        <!-- <input type="text" name="contry-state" value="" placeholder=""> -->
+                        <input type="text" name="first-name" value=" {{ request.user.email }}" placeholder="" disabled>
+
+                      </label>
+                    </li>
+                    <!-- PHONE -->
+                    <li class="col-md-6">
+                      <label> *{% trans 'PHONE' %}
+                        <!-- <input type="text" name="postal-code" value="" placeholder=""> -->
+                        {{ billform.phone }}
+                       
+                      </label>
+                    </li>
+                   
+                   
+                  
+                    <!-- PHONE -->
+                    <li class="col-md-6">
+                      <button id="billform-button" type="submit" name="continue" class="btn">{% trans 'continue' %}</button>
+                    </li>
+                    
+                    <!-- CREATE AN ACCOUNT -->
+                    <li class="col-md-6">
+                      <div class="checkbox margin-0 margin-top-20">
+                        <input id="checkbox1" class="styled" type="checkbox">
+                        <label for="checkbox1"> Ship to a different address </label>
+                      </div>
+                    </li>
+                  </ul>
+                  
+                </form>
+                
+
+               
+                
+                <!-- SHIPPING info -->
+                <h6 class="margin-top-50">{% trans 'SHIPPING info' %}</h6>
+                
+                <form method="POST" id="ship-form">
+                 {% csrf_token %}
+                 
+                  <ul class="row" id="shipping-info">
+                    
+                    <!-- Name -->
+                    <li class="col-md-6">
+                      <label> *{% trans 'FIRST NAME' %}
+                        <!-- <input type="text" name="first-name" value="" placeholder="first-name"> -->
+                        <input type="text" name="first-name" value=" {{ request.user.first_name }}" placeholder="" disabled>
+
+                      </label>
+                    </li>
+                    <!-- LAST NAME -->
+                    <li class="col-md-6">
+                      <label> *{% trans 'LAST NAME' %}
+                        <!-- <input type="text" name="last-name" value="" placeholder="last-name"> -->
+                        <input type="text" name="first-name" value=" {{ request.user.last_name }}" placeholder="" disabled>
+                        
+                      </label>
+                    </li>
+                    <li class="col-md-6"> 
+                      <!-- COMPANY NAME -->
+                      <label>{% trans 'COMPANY NAME' %}
+                        <!-- <input type="text" name="company" value="" placeholder="company"> -->
+                        {{ shipform.company }}
+                      </label>
+                    </li>
+                    <li class="col-md-6"> 
+                      <!-- ADDRESS -->
+                      <label>*{% trans 'ADDRESS' %}
+                        <!-- <input type="text" name="address" value="" placeholder="address"> -->
+                        {{ shipform.address }}
+                      </label>
+                    </li>
+                    <!-- TOWN/CITY -->
+                    <li class="col-md-6">
+                      <label>*{% trans 'TOWN/CITY' %}
+                        <!-- <input type="text" name="town" value="" placeholder="CITY"> -->
+                        {{ shipform.city }}
+                      </label>
+                    </li>
+                    
+                    <!-- COUNTRY -->
+                    <li class="col-md-6">
+                      <label> {% trans 'COUNTRY' %}
+                        <!-- <input type="text" name="contry-state" value="" placeholder="COUNTRY"> -->
+                        {{ shipform.country }}
+                      </label>
+                    </li>
+                    
+                    <!-- EMAIL ADDRESS -->
+                    <li class="col-md-6">
+                      <label> *{% trans 'EMAIL ADDRESS' %}
+                        <!-- <input type="text" name="contry-state" value="" placeholder="EMAIL"> -->
+                        <input type="text" name="first-name" value=" {{ request.user.email }}" placeholder="" disabled>
+
+                      </label>
+                    </li>
+                    <!-- PHONE -->
+                    <li class="col-md-6">
+                      <label> *{% trans 'PHONE' %}
+                        <!-- <input type="text" name="postal-code" value="" placeholder="PHONE"> -->
+                        {{ shipform.phone }}
+                      </label>
+                    </li>
+                   
+                    <!-- PHONE -->
+                    <li class="col-md-6">
+                      <button id="shipform-button" type="submit" name="submit" class="btn">{% trans 'SUBMIT' %}</button>
+                    </li>
+                  </ul>
+                  
+                
+                </form>
+                
+              </div>
+              
+              <!-- SUB TOTAL -->
+              <div class="col-sm-5">
+                <h6>{% trans 'YOUR ORDER' %}</h6>
+                <div class="order-place">
+                  <div class="order-detail">
+                    {% for item in items %}
+                    <p>{{ item.product.title }} <span>${{ item.product.money }} </span></p>
+                    <!-- <p>STOOL <span>$199 </span></p>
+                    <p>WOOD SPOON <span> $139</span></p> -->
+                    {% endfor %}
+                    
+                    <!-- SUB TOTAL -->
+                    <p class="all-total">{% trans 'TOTAL COST' %} <span> ${{ order.get_grand_total }}</span></p>
+                    <p class="all-total">TOTAL quantity <span> {{ order.get_cart_items }}</span></p>
+
+                  </div>
+                  <div class="pay-meth">
+                    <ul>
+                      <li>
+                        <div class="radio">
+                          <input type="radio" name="radio1" id="radio1" value="option1" checked>
+                          <label for="radio1"> DIRECT BANK TRANSFER </label>
+                        </div>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam erat turpis, pellentesque non leo eget, pulvinar pretium arcu. Mauris porta elit non.</p>
+                      </li>
+                      <li>
+                        <div class="radio">
+                          <input type="radio" name="radio1" id="radio2" value="option2">
+                          <label for="radio2"> CASH ON DELIVERY</label>
+                        </div>
+                      </li>
+                      <li>
+                        <div class="radio">
+                          <input type="radio" name="radio1" id="radio3" value="option3">
+                          <label for="radio3"> CHEQUE PAYMENT </label>
+                        </div>
+                      </li>
+                      <li>
+                        <div class="radio" id="payment-info">
+                          <input type="radio" name="radio1" id="radio4" value="option4">
+                          <label for="radio4"> PAYPAL </label>
+                        </div>
+                      </li>
+                      <li>
+                        <div class="checkbox">
+                          <input id="checkbox3-4" class="styled" type="checkbox">
+                          <label for="checkbox3-4"> I’VE READ AND ACCEPT THE <span class="color"> TERMS & CONDITIONS </span> </label>
+                        </div>
+                      </li>
+                    </ul>
+                    <div id="paypal-button-container"></div>
+                    <!-- <a href="" id="make-payment" class="btn  btn-dark pull-right margin-top-30">{% trans 'PLACE ORDER' %}</a>  -->
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    
+    <!-- About -->
+    <section class="small-about padding-top-150 padding-bottom-150">
+      <div class="container"> 
+        
+        <!-- Main Heading -->
+        <div class="heading text-center">
+          <h4>{% trans 'about PAVSHOP' %}</h4>
+          <p>Phasellus lacinia fermentum bibendum. Interdum et malesuada fames ac ante ipsumien lacus, eu posuere odio luctus non. Nulla lacinia,
+            eros vel fermentum consectetur, risus purus tempc, et iaculis odio dolor in ex. </p>
+        </div>
+        
+        <!-- Social Icons -->
+        <ul class="social_icons">
+          <li><a href="#."><i class="icon-social-facebook"></i></a></li>
+          <li><a href="#."><i class="icon-social-twitter"></i></a></li>
+          <li><a href="#."><i class="icon-social-tumblr"></i></a></li>
+          <li><a href="#."><i class="icon-social-youtube"></i></a></li>
+          <li><a href="#."><i class="icon-social-dribbble"></i></a></li>
+        </ul>
+      </div>
+    </section>
+    
+
+
+{% endblock %}
+
+
+
+
+{% block js %}
+ 
+<script src="https://www.paypal.com/sdk/js?client-id=ATOuFPllmTws-wocO62tploPKewMO8FTtyNDZjrTOh8uR_h5ruquaGd3KlyvhJw0ZwNPMieHCVyYazuF&currency=USD&disable-funding=credit"></script>
+
+
+
+<script>
+  var total = '{{order.get_grand_total}}'
+
+  // Render the PayPal button into #paypal-button-container
+  paypal.Buttons({
+
+  // Set up the transaction
+  createOrder: function(data, actions) {
+            return actions.order.create({
+                purchase_units: [{
+                    amount: {
+                        value:total
+                    }
+                }]
+            });
+        },
+
+        // Finalize the transaction
+        onApprove: function(data, actions) {
+            return actions.order.capture().then(function(details) {
+                // Show a success message to the buyer
+                submitFormData()
+            });
+        }
+
+    }).render('#paypal-button-container');
+</script>
+
+
+
+<script type="text/javascript">
+  // var total = '{{order.get_grand_total}}'
+
+  var shipForm = document.getElementById('ship-form')
+  var billForm = document.getElementById('bill-form')
+
+  var token = localStorage.getItem('token')
+
+  shipForm.addEventListener('submit', function(e){
+    // e.preventDefault()
+    console.log('Ship form submitted ...')
+    // document.getElementById('shipform-button').classList.add('hidden')
+    // document.getElementById('payment-info').classList.remove('hidden')
+
+  }),
+  billForm.addEventListener('submit', function(e){
+    // e.preventDefault()
+    console.log('Bill form submitted...')
+    // document.getElementById('billform-button').classList.add('hidden')
+    // document.getElementById('payment-info').classList.remove('hidden')
+
+  })
+
+  
+/*  
+   document.getElementById('make-payment').addEventListener('click', function(e){
+    e.preventDefault(),
+    submitFormData()
+   })
+*/
+
+  function submitFormData(){
+    console.log('Payment button clicked')
+
+    var userFormData = {
+      'name':null,
+      'email':null,
+      'total':total
+    }
+    
+
+    var  url = 'http://127.0.0.1:8000/en/process_order/'
+
+    fetch(url, {
+      method : 'POST',
+      headers : {
+        'Content-Type' : 'application/json'
+        // 'X-CSRFToken': shipForm.csrfmiddlewaretoken.value,
+        // 'Authorization' : `Bearer ${token}`,
+        
+      },
+      body:JSON.stringify({'shipform':shipForm, 'billform':billForm})
+    })
+    .then((response) => response.json())
+    .then((data) => {
+      console.log('Success:', data);
+      alert('Transaction completed');
+      window.location.href = "{% url 'home' %}"
+
+    })
+
+
+
+  }
+
+
+
+
+</script>
+
+{% endblock %}

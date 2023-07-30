@@ -1,0 +1,200 @@
+1. Son üç blog postunu qaytaran queryset (qs) yazın
+
+1-ci metod -> ( Ən son update olunmuş blogları qaytarır )
+>>> from blogs.models import *
+>>> import datetime
+>>> from datetime import datetime, date
+>>> current_date = datetime.today().month
+>>> recent_post = Story.objects.filter(updated_at__month=current_date).order_by('-updated_at')[:3]
+
+Output:
+<MultilingualQuerySet [<Story: test1>, <Story: Bədən və Dəriyə Qulluq 1>, <Story: Geyim 3>]>
+
+
+2-ci metod:
+>>> len_of_stories = len(Story.objects.all())
+>>> last_three = Story.objects.all()[8:]
+
+Output:
+<MultilingualQuerySet [<Story: Aksesuar 2>, <Story: Mebel 3>, <Story: Geyim 2>]>
+
+
+
+
+2. Daxil edilmiş blog postun commentlerini qaytaran qs yazın
+
+Məsələn, id = 7 olan bloga aid rəyləri göstərək
+
+>>> comments = Comment.objects.filter(story__id=7).all()
+<QuerySet [<Comment: Super! True parvanayva>, <Comment: Looks beautiful! True parvana>]>
+
+>>> list_ = []
+>>> for comment in comments.values():
+...     list_.append(comment['message'])
+... 
+>>> print(list_)
+['Super!', 'Looks beautiful!']
+
+
+
+3. Daxil edilmiş məlumata uyğun blog postları axtarış edən qs yaradın
+
+>>> from django.db.models import Q
+>>> storys = Story.objects.filter(Q(title__icontains='Geyim 1') | Q(category__name='Geyim')).all()
+
+
+
+4. Blog postların kateqoriyalarını qaytaran qs yazın
+
+>>> category_of_blogs = Category.objects.all()
+>>> empty_list = []
+>>> for category in category_of_blogs.values(): 
+...     empty_list.append(category['name'])
+... 
+>>> print(empty_list)
+['Aksesuarlar', 'Geyimlər', 'Bədən və Dəriyə Qulluq', 'Mebel']
+
+
+
+
+5. Ən populyar beş blog post taglərini qaytaran qs yazın
+
+Burada ən populyar beş blog kimi ən çox rəy yazılan blogların tag'larını qaytaran qs yaza bilərik
+
+>>> from django.db.models import Count
+- Comment yazılan blogların queryseti
+>>> q = Story.objects.annotate(Count("comments"))
+<MultilingualQuerySet [<Story: Aksesuar 1>, <Story: Geyim 2>, <Story: Mebel 3>, <Story: test1>, <Story: Geyim 3>, <Story: Mebel 2>, <Story: Mebel 1>, <Story: Aksesuar 2>, <Story: Geyim 1>, <Story: Bədən və Dəriyə Qulluq 2>, <Story: Bədən və Dəriyə Qulluq 1>]>
+
+- Hər bir bloga yazılan rəy sayını müəyyən edirik ( q[1].comments__count  və ya  q[2].num_of_reviews() -> modeldəki funksiyadan istifadə edirik )
+
+>>> empty_list = []
+>>> for i in q:
+...     empty_list.append(i.num_of_reviews())
+... 
+>>> 
+>>> empty_list
+[2, 0, 0, 0, 0, 0, 0, 2, 5, 2, 3]
+
+
+- Ən çox rəy yazılan blogları ən populyar bloglar kimi qəbul edib 5 blogun tagları üçün queryset yazırıq
+>>> tag_list = []
+>>> for i in q:
+...     if i.num_of_reviews() != 0:
+...        tag_list.append(i.get_tags())
+... 
+>>> 
+>>> tag_list
+['Aksesuarlar', 'Aksesuarlar', 'Geyimlər', 'Bədən və Dəriyə Qulluq', 'Bədən və Dəriyə Qulluq']
+
+
+
+
+6. Daxil edilmiş blog postla oxşar olan son üç blog postunu qaytaran qs yazın
+
+>>> blog = Story.objects.get(id = 7)
+>>> similar_blogs = Story.objects.filter(Q(author = blog.author) & Q(category__name = blog.category.name)).order_by('-updated_at')[:3]
+<MultilingualQuerySet [<Story: Aksesuar 2>, <Story: Aksesuar 1>]>
+
+
+
+7. Məhsulların kateqoriyalarını qaytaran qs yazın (queryset nəticəsi kimi qayıdan kateqoriyaların hər birinə ən az bir product aid olmalıdır)
+
+- Burada hər kateqoriyadakı məhsul sayını müəyyən edirik
+>>> category_of_products = Category.objects.annotate(Count("products"))
+<MultilingualQuerySet [<Category: Idman sport>, <Category: Aksesuarlar accessories>, <Category: Mebel furniture>, <Category: Geyimlər clothes>]>
+
+- Category adı və hər kateqoriyadakı məhsul sayını göstərə bilərik
+>>> category_of_products.values_list('name', 'products__count')
+<MultilingualQuerySet [('Idman', 2), ('Aksesuarlar', 2), ('Mebel', 3), ('Geyimlər', 3)]>
+
+
+
+8. Daxil edilmiş məlumata uyğun məhsulları axtarış edən qs yaradın
+
+>>> from django.db.models import Q
+>>> Product.objects.filter(Q(category__name = 'Idman') & Q(money__gte = 50))
+<MultilingualQuerySet [<Product: Sport 1>, <Product: Sport 2>]>
+
+
+9. Daxil edilmiş məhsulun (product) review-larını qaytaran qs yazın
+
+Məsələn, id = 1 olan producta aid rəyləri göstərək
+
+>>> review = Review.objects.filter(product__id = 1).all() 
+>>> review.values_list('review')
+<QuerySet [('Ooops',), ('super',), ('Sad',)]>
+
+və ya
+
+>>> review_list = []
+>>> for i in review.values():
+... 
+...     review_list.append(i['review'])
+... 
+>>> 
+>>> review_list
+['Ooops', 'super', 'Sad']
+
+
+
+
+10. Məhsulun qiymət və əlavə olunma tarixinə görə sort edən qs yazın
+
+>>> sort_products = Product.objects.filter(Q(money__gte = 600) & Q(created_at__month__gte = 6)).all()
+>>> sort_products
+<MultilingualQuerySet [<Product: Mebel 1>, <Product: Mebel 3>, <Product: Mebel 2>]>
+
+
+
+
+11. Daxil edilmiş kateqoriyaya aid məhsulları qaytaran qs yazın
+
+>>> category = Product.objects.filter(category__id = 3).all()
+>>> category
+<MultilingualQuerySet [<Product: Aksesuar 2>, <Product: Aksesuar 1>]>
+
+
+12. Ən populyar beş məhsul (product) taglərini qaytaran qs yazın
+
+Burada ən populyar beş məhsul kimi ən çox rəy yazılan məhsulların tag'larını qaytaran qs yaza bilərik
+
+>>> q = Product.objects.annotate(Count("reviews"))
+>>> q
+<MultilingualQuerySet [<Product: Aksesuar 2>, <Product: Aksesuar 1>, <Product: Sport 1>, <Product: Sport 2>, <Product: Mebel 1>, <Product: 
+Geyim 2>, <Product: Geyim 1>, <Product: Mebel 2>, <Product: Geyim 3>, <Product: Mebel 3>]>
+
+
+- Hər bir məhsula yazılan rəy sayını müəyyən edirik ( q[1].reviews__count)
+
+>>> empty_list = []
+>>> 
+>>> for i in q:
+...     empty_list.append(i.reviews__count) 
+... 
+>>> 
+>>> empty_list
+[1, 0, 0, 0, 3, 3, 0, 2, 1, 1]
+
+
+- Ən çox rəy yazılan məhsulları ən populyar məhsullar kimi qəbul edib 5 məhsulun tagları üçün queryset yazırıq
+
+>>> tag_list = []
+>>> for i in q:
+...     if i.reviews__count != 0:
+...        tag_list.append(i.get_tags())
+... 
+>>> 
+>>> tag_list[:5]
+['Aksesuarlar accessories', 'Mebel furniture', 'Geyimlər clothes', 'Mebel furniture', 'Geyimlər clothes']
+
+
+
+13. Daxil edilmiş məhsulla oxşar olan son səkkiz məhsulu qaytaran qs yazın
+
+>>> product = Product.objects.get(id = 9)
+>>> product
+<Product: Sport 1>
+
+>>> similar_products = Product.objects.filter(Q(category = product.category) & Q(brand__name = product.brand.name)).order_by('-updated_at')[:8]
+<MultilingualQuerySet [<Product: Sport 2>, <Product: Sport 1>]>

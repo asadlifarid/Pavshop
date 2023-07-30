@@ -1,0 +1,26 @@
+def blog_detail_page(request, id):
+
+    story = get_object_or_404(Story, id=id)
+    # comments = story.comments.filter(active=True)
+    # new_comment = None
+    
+    form = CommentForm()
+    print('form is here -----------')
+    if request.method == "POST":
+        form = CommentForm(data = request.POST)
+        if form.is_valid():
+            print('post is valid')
+            parent_obj = None
+            
+            comment = form.save(commit=False)
+            comment.author = request.user
+            print(comment.author)
+            comment.story = story
+            comment.save()
+            return redirect(reverse_lazy("blog_detail_page", kwargs={'id':id}))
+            
+
+        else:
+            form = CommentForm()
+    reviews = Comment.objects.filter(story__id=id).all()
+    

@@ -1,0 +1,91 @@
+from django.db import models
+from django.contrib.auth.models import User
+from django.urls import reverse
+from ckeditor.fields import RichTextField
+from django.utils.html import mark_safe
+# from authentication.models import User
+
+# Create your models here.
+
+# Category
+class Category(models.Model):
+    name = models.CharField(max_length=150)
+    slug = models.SlugField(null=False, unique=True)   # null=True et, null da ola biler
+
+
+    def __str__(self):
+        return f'{self.name} => {self.slug}'
+
+
+    def get_absolute_url(self):
+        return reverse("blog-detail", kwargs={"slug": self.slug})
+    
+    
+
+
+# Stories - blogs
+class Story(models.Model):
+    title = models.CharField(max_length=255)
+    description = models.TextField()
+    category = models.ForeignKey(Category, on_delete=models.CASCADE, related_name='storys')
+    image = models.ImageField(upload_to='story_images')
+
+    created_at = models.DateTimeField(blank=True, null=True)
+    slug = models.SlugField(null=True, unique=True)    # null=True ola biler
+    content = RichTextField(blank=True, null=True)
+
+
+    def __str__(self):
+        return '{} {} {} {} {} {} {}'.format(self.title, self.description, self.slug, self.created_at, self.category, self.image, self.content)
+    
+    
+    def image_tag(self):
+        return mark_safe('<img src="%s" width="100px" height="100px" />' % (self.image.url))
+
+
+# Tags
+class Tags(models.Model):
+    tag = models.CharField(max_length=50)
+    stories = models.ManyToManyField(Story)
+    slug = models.SlugField(null=False, unique=True)
+ 
+    def __str__(self):
+        return f'{self.tag} => {self.slug} => {self.stories}'
+
+
+    def get_tags(self):
+        # print(Tags.stories)
+        return '\n'.join([str(p) for p in self.stories.all()])
+
+
+    # def __unicode__(self):
+    #     return "{0}".format(self.tag)
+
+
+# StoryImage
+# class StoryImage(models.Model):
+#     image = models.ImageField(upload_to='story_images')
+#     story = models.ForeignKey(Story, on_delete=models.CASCADE, related_name='images')
+    
+#     created_at = models.DateTimeField(auto_now_add=True)
+
+
+#     def __str__(self):
+#         return '{} {} {}'.format(self.image, self.story, self.created_at)
+
+
+
+# User
+# class User(models.Model):
+#     name = models.CharField(max_length=255)
+    
+
+
+# Comment
+class Comment(models.Model):
+    author = models.ForeignKey(User, on_delete=models.CASCADE, related_name="comments")
+    message = models.TextField()
+    story = models.ForeignKey(Story, on_delete=models.CASCADE, related_name="comments")
+    
+    created_at = models.DateTimeField(auto_now_add=True)
+

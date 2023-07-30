@@ -1,0 +1,25 @@
+
+
+
+<title>{% block title %}PAVSHOP - Search{% endblock %}</title>
+
+<h4 style="color:goldenrod">No blogs were found for your search:  "{{name}}"</h4>
+<br>
+<h4>Try Another Search?</h4>
+
+
+<br>
+
+<div class="search">
+    <form action="{% url 'blog_list_page' %}" role="search" method="get">
+    <input class="form-control" type="search" placeholder="Search" name="search" role="search">
+    <button type="submit"><i class="fa fa-search"></i></button>
+                      
+    </form>
+  </div>
+
+
+
+
+
+

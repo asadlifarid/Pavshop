@@ -1,0 +1,560 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-06-26 18:09+0400\n"
+"PO-Revision-Date: 2023-06-27 17:58+0000\n"
+"Last-Translator: Parvana Yva. <parvanayva@gmail.com>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Translated-Using: django-rosetta 0.9.9\n"
+
+#: .\base\views.py:82
+msgid "SUCCESS"
+msgstr "Uğurla tamamlandı"
+
+#: .\base\views.py:95
+msgid "ERROR"
+msgstr "Xəta baş verdi"
+
+#: .\templates\base.html:74 .\templates\blog-list.html:24
+#: .\templates\contact.html:21 .\templates\product-list.html:25
+msgid "Home"
+msgstr "Ana səhifə"
+
+#: .\templates\base.html:76 .\templates\base.html:359
+msgid "About Us"
+msgstr "Haqqımızda"
+
+#: .\templates\base.html:77
+msgid "Blogs"
+msgstr "Bloqlar"
+
+#: .\templates\base.html:80 .\templates\base.html:148
+msgid "Product List"
+msgstr "Məhsul listi"
+
+#: .\templates\base.html:82 .\templates\base.html:149
+msgid "Index"
+msgstr "Baş səhifə"
+
+#: .\templates\base.html:83 .\templates\base.html:154
+msgid "Shopping Cart"
+msgstr "Səbət"
+
+#: .\templates\base.html:84 .\templates\base.html:155
+#: .\templates\base.html:376
+msgid "Checkout"
+msgstr "Sifarişi rəsmiləşdir"
+
+#: .\templates\base.html:92 .\templates\base.html:111
+msgid "Register"
+msgstr "Qeydiyyat"
+
+#: .\templates\base.html:99
+msgid "Create Blog"
+msgstr "Bloq yarat"
+
+#: .\templates\base.html:101
+msgid "Create own story"
+msgstr "Öz bloqunu yarat"
+
+#: .\templates\base.html:140
+msgid "store"
+msgstr "mağaza"
+
+#: .\templates\base.html:146
+msgid "Shop Pages"
+msgstr "Alış-veriş səhifəsi"
+
+#: .\templates\base.html:161
+msgid "TOp Rate Products"
+msgstr "Ulduzlu məhsullar"
+
+#: .\templates\base.html:207 .\templates\contact.html:22
+msgid "contact"
+msgstr "Əlaqə"
+
+#: .\templates\base.html:220
+msgid "HELLO"
+msgstr "Salam"
+
+#: .\templates\base.html:222 .\templates\base.html:228
+msgid "MY CART"
+msgstr "Səbət"
+
+#: .\templates\base.html:223 .\templates\base.html:229
+msgid "ACCOUNT INFO"
+msgstr "İstifadəçi profili"
+
+#: .\templates\base.html:224
+msgid "Log Out"
+msgstr "Çıxış"
+
+#: .\templates\base.html:227
+msgid "Log In"
+msgstr "Daxil ol"
+
+#: .\templates\base.html:258
+msgid "VIEW CART"
+msgstr "Səbətini gör"
+
+#: .\templates\base.html:259
+msgid "CHECK OUT"
+msgstr "Sifarişi rəsmiləşdir"
+
+#: .\templates\base.html:311
+msgid "NEWSLETTER"
+msgstr "Abunəlik"
+
+#: .\templates\base.html:322
+msgid "SEND ME"
+msgstr "Göndər"
+
+#: .\templates\base.html:335
+msgid "Street No. 12, Newyork 12"
+msgstr "Küçə NO. 12, Nyu York 12"
+
+#: .\templates\base.html:344
+msgid "HELPFUL LINKS"
+msgstr "Faydalı Linklər"
+
+#: .\templates\base.html:346
+msgid "Products"
+msgstr "Məshullar"
+
+#: .\templates\base.html:347
+msgid "Find a Store"
+msgstr "Mağaza tap"
+
+#: .\templates\base.html:348
+msgid "Features"
+msgstr "Özəlliklər"
+
+#: .\templates\base.html:349
+msgid "Privacy Policy"
+msgstr "Məxfilik Siyasəti"
+
+#: .\templates\base.html:350
+msgid "Blog"
+msgstr "Bloq"
+
+#: .\templates\base.html:351
+msgid "Press Kit"
+msgstr "Mətbuat"
+
+#: .\templates\base.html:357
+msgid "SHOP"
+msgstr "Mağaza"
+
+#: .\templates\base.html:360
+msgid "Career"
+msgstr "Karyera"
+
+#: .\templates\base.html:361
+msgid "Shipping Methods"
+msgstr "Daşınma metodları"
+
+#: .\templates\base.html:362
+msgid "Contact"
+msgstr "Əlaqə"
+
+#: .\templates\base.html:363
+msgid "Support"
+msgstr "Dəstək"
+
+#: .\templates\base.html:364
+msgid "Retailer"
+msgstr "Satıcı"
+
+#: .\templates\base.html:370
+msgid "MY ACCOUNT"
+msgstr "Hesabım"
+
+#: .\templates\base.html:372
+msgid "Login"
+msgstr "Daxil ol"
+
+#: .\templates\base.html:373
+msgid "My Account"
+msgstr "Hesabım"
+
+#: .\templates\base.html:374
+msgid "My Cart"
+msgstr "Səbətim"
+
+#: .\templates\base.html:375
+msgid "Wishlist"
+msgstr "Seçilmiş et"
+
+#: .\templates\base.html:383
+msgid "All right reserved."
+msgstr "Bütün hüquqlar qorunur."
+
+#: .\templates\blog-detail.html:21
+msgid "BLOg details"
+msgstr "Bloq detalları"
+
+#: .\templates\blog-detail.html:89
+#| msgid "PAVSHOP PRODUCTS"
+msgid "PRODUCT TAGS"
+msgstr "Məhsul teqləri"
+
+#: .\templates\blog-detail.html:172 .\templates\blog-detail.html:305
+msgid "COMMENTS"
+msgstr "Rəylər"
+
+#: .\templates\blog-detail.html:220 .\templates\product-detail.html:227
+msgid "This review is deleted by site owner"
+msgstr "Bu rəy silinib"
+
+#: .\templates\blog-detail.html:241
+msgid "There are no comments yet."
+msgstr "Rəy yoxdur"
+
+#: .\templates\blog-detail.html:280
+msgid "POST YOUR COMMENTS"
+msgstr "Rəy bildir"
+
+#: .\templates\blog-detail.html:311
+msgid "Submit Comment"
+msgstr "Təsdiq et"
+
+#: .\templates\blog-detail.html:324
+msgid "you may like"
+msgstr "Bunlara da baxa bilərsən"
+
+#: .\templates\blog-detail.html:341 .\templates\blog-list.html:58
+#| msgid "SEND ME"
+msgid "READ MORE"
+msgstr "Daha çox oxu"
+
+#: .\templates\blog-detail.html:387 .\templates\blog-list.html:259
+msgid "category"
+msgstr "Kateqoriya"
+
+#: .\templates\blog-detail.html:405 .\templates\blog-list.html:277
+msgid "recent post"
+msgstr "Son postlar"
+
+#: .\templates\blog-detail.html:426 .\templates\blog-list.html:300
+#: .\templates\product-list.html:200
+msgid "PAUPLAR TAGS"
+msgstr "Məşhur taglar"
+
+#: .\templates\blog-detail.html:442 .\templates\blog-list.html:316
+msgid "archives"
+msgstr "Arxiv"
+
+#: .\templates\blog-list.html:370
+msgid "FOLLOW US @ INSTAGRAM"
+msgstr "Bizi instagramda izlə"
+
+#: .\templates\checkout.html:18
+#| msgid "CHECK OUT"
+msgid "CHECKOUT"
+msgstr "Sifarişi rəsmiləşdir"
+
+#: .\templates\checkout.html:46
+msgid "BILLING DETAILS"
+msgstr "Ödəniş detalları"
+
+#: .\templates\checkout.html:54 .\templates\checkout.html:146
+msgid "FIRST NAME"
+msgstr "Ad"
+
+#: .\templates\checkout.html:61 .\templates\checkout.html:154
+#| msgid "NAME"
+msgid "LAST NAME"
+msgstr "Soyad"
+
+#: .\templates\checkout.html:70 .\templates\checkout.html:162
+msgid "COMPANY NAME"
+msgstr "Şirkət adı"
+
+#: .\templates\checkout.html:77 .\templates\checkout.html:169
+#| msgid "OUR ADDRESS"
+msgid "ADDRESS"
+msgstr "Adres"
+
+#: .\templates\checkout.html:84 .\templates\checkout.html:176
+msgid "TOWN/CITY"
+msgstr "Şəhər"
+
+#: .\templates\checkout.html:92 .\templates\checkout.html:184
+msgid "COUNTRY"
+msgstr "Ölkə"
+
+#: .\templates\checkout.html:100 .\templates\checkout.html:192
+#| msgid "OUR ADDRESS"
+msgid "EMAIL ADDRESS"
+msgstr "Email"
+
+#: .\templates\checkout.html:108 .\templates\checkout.html:200
+msgid "PHONE"
+msgstr "Mobil"
+
+#: .\templates\checkout.html:119
+#| msgid "Continue and"
+msgid "continue"
+msgstr "Davam edin"
+
+#: .\templates\checkout.html:137
+#| msgid "SHOPPING CART"
+msgid "SHIPPING info"
+msgstr "Göndəriş məlumatı"
+
+#: .\templates\checkout.html:208
+#| msgid "SUBJECT"
+msgid "SUBMIT"
+msgstr "Təsdiq et"
+
+#: .\templates\checkout.html:219
+msgid "YOUR ORDER"
+msgstr "Sifarişiniz"
+
+#: .\templates\checkout.html:227 .\templates\shopping-cart.html:238
+msgid "TOTAL COST"
+msgstr "Cəmi qiymət"
+
+#: .\templates\checkout.html:263
+msgid "PLACE ORDER"
+msgstr "Sifarişi rəsmiləşdir"
+
+#: .\templates\checkout.html:278 .\templates\contact.html:118
+#: .\templates\index.html:471 .\templates\product-detail.html:401
+#: .\templates\product-list.html:249 .\templates\register.html:180
+#: .\templates\shopping-cart.html:253
+msgid "about PAVSHOP"
+msgstr "PAVSHOP haqqında"
+
+#: .\templates\contact.html:35
+msgid "PLEASE fill-up FEW details"
+msgstr "Zəhmət olmasa formu doldurun"
+
+#: .\templates\contact.html:40
+msgid "Thank You. Your Message has been Submitted"
+msgstr "Təşəkkürlər! Sizin mesajınız qəbul olundu"
+
+#: .\templates\contact.html:49
+msgid "full name"
+msgstr "tam adınız"
+
+#: .\templates\contact.html:55
+msgid "Email"
+msgstr "Email"
+
+#: .\templates\contact.html:62
+msgid "Phone"
+msgstr "Mobil"
+
+#: .\templates\contact.html:70
+msgid "SUBJECT"
+msgstr "Mövzu"
+
+#: .\templates\contact.html:76
+msgid "Message"
+msgstr "Mesaj"
+
+#: .\templates\contact.html:82
+#| msgid "SEND ME"
+msgid "SEND MAIL"
+msgstr "Mail göndər"
+
+#: .\templates\contact.html:92
+msgid "OUR ADDRESS"
+msgstr "Adresimiz"
+
+#: .\templates\index.html:87
+#| msgid "SHOP"
+msgid "SHOP NOW"
+msgstr "İndi al"
+
+#: .\templates\index.html:158
+msgid "BUY NOW"
+msgstr "İndi al"
+
+#: .\templates\index.html:174
+msgid "new arrival"
+msgstr "Yeni gələnlər"
+
+#: .\templates\index.html:318
+#| msgid "TOp Rate Products"
+msgid "popular products"
+msgstr "Məşhur məhsullar"
+
+#: .\templates\product-detail.html:66
+#| msgid "category"
+msgid "Category"
+msgstr "Kateqoriya"
+
+#: .\templates\product-detail.html:68
+#| msgid "brands"
+msgid "Brand"
+msgstr "Brend"
+
+#: .\templates\product-detail.html:112
+msgid "ADD TO CART"
+msgstr "Səbətə at"
+
+#: .\templates\product-detail.html:120
+msgid "DELIVERY INFORMATION"
+msgstr "ÇATDIRILMA MƏLUMATI"
+
+#: .\templates\product-detail.html:125
+#| msgid "SHOPPING CART"
+msgid "SHIPPING & RETURNS"
+msgstr "Daşıma və geri qaytarılma"
+
+#: .\templates\product-detail.html:133
+msgid "SHARE THIS PRODUCT"
+msgstr "Bu məhsulu paylaş"
+
+#: .\templates\product-detail.html:153
+msgid "DESCRIPTION"
+msgstr "Təsviri"
+
+#: .\templates\product-detail.html:154
+msgid "REVIEW"
+msgstr "Rəy"
+
+#: .\templates\product-detail.html:162
+msgid "Small description:"
+msgstr "Kiçik təsvir"
+
+#: .\templates\product-detail.html:165
+msgid "Availability"
+msgstr "Mövcudluq"
+
+#: .\templates\product-detail.html:168
+msgid "In stock"
+msgstr "Stokda"
+
+#: .\templates\product-detail.html:171
+msgid "Not in stock"
+msgstr "Stokda yoxdur"
+
+#: .\templates\product-detail.html:197
+msgid "REVIEWS FOR SHIP YOUR IDEA"
+msgstr "Rəy"
+
+#: .\templates\product-detail.html:257
+msgid "ADD REVIEW"
+msgstr "Rəy bildir"
+
+#: .\templates\product-detail.html:278
+#| msgid "YOUR ORDER"
+msgid "YOUR REVIEW"
+msgstr "Rəyiniz"
+
+#: .\templates\product-detail.html:288
+msgid "POST REVIEW"
+msgstr "Təsdiq et"
+
+#: .\templates\product-detail.html:310
+msgid "YOU MAY LIKE IT"
+msgstr "Bunlara da baxa bilərsən"
+
+#: .\templates\product-list.html:21
+msgid "PAVSHOP PRODUCTS"
+msgstr "PAVSHOP məhsullar"
+
+#: .\templates\product-list.html:154
+msgid "FILTER BY PRICE"
+msgstr "Qiymətinə görə çeşidlə"
+
+#: .\templates\product-list.html:170
+msgid "FILTER BY COLORS"
+msgstr "Rənginə görə çeşidlə"
+
+#: .\templates\product-list.html:217
+msgid "brands"
+msgstr "Brendlər"
+
+#: .\templates\register.html:18 .\templates\register.html:46
+msgid "REGISTER"
+msgstr "Qeydiyyat et"
+
+#: .\templates\register.html:160
+msgid "REGISTER NOW"
+msgstr "Indi qeydiyyat et"
+
+#: .\templates\shopping-cart.html:18
+msgid "SHOPPING CART"
+msgstr "Səbət"
+
+#: .\templates\shopping-cart.html:43
+#| msgid "PAVSHOP PRODUCTS"
+msgid "PRODUCTS"
+msgstr "Məhsullar"
+
+#: .\templates\shopping-cart.html:47
+msgid "NAME"
+msgstr "Ad"
+
+#: .\templates\shopping-cart.html:51
+msgid "PRICE"
+msgstr "Qiymət"
+
+#: .\templates\shopping-cart.html:55
+msgid "QTY"
+msgstr "Kəmiyyət"
+
+#: .\templates\shopping-cart.html:60
+msgid "TOTAL"
+msgstr "Ümumi"
+
+#: .\templates\shopping-cart.html:220
+msgid "DISCOUNT CODE"
+msgstr "Endirim kodu"
+
+#: .\templates\shopping-cart.html:223
+msgid "APPLY CODE"
+msgstr "Kodu tətbiq et"
+
+#: .\templates\shopping-cart.html:225
+#| msgid "Continue and"
+msgid "continue shopping"
+msgstr "şopinqə davam edin"
+
+#: .\templates\shopping-cart.html:225
+msgid "update cart"
+msgstr "Səbəti yenilə"
+
+#: .\templates\shopping-cart.html:230
+msgid "grand total"
+msgstr "Yekun qiymət"
+
+#: .\templates\success_page.html:85
+msgid "Thank you for registration!"
+msgstr "Qeydiyyatınız tamamlandı!"
+
+#: .\templates\success_page.html:87
+msgid "Continue and"
+msgstr "Davam edin və"
+
+#: .\templates\success_page.html:87
+msgid "Login your account!"
+msgstr "Hesabınıza daxil olun!"
+
+#: .\templates\success_page.html:89
+msgid "or"
+msgstr "və ya"
+
+#: .\templates\success_page.html:91
+#| msgid "Register"
+msgid "Register with"
+msgstr "Qeydiyyat et"
+
+#: .\templates\success_page.html:91
+msgid "another account"
+msgstr "başqa hesabla"

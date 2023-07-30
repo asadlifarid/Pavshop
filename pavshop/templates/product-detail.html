@@ -1,0 +1,530 @@
+{% extends 'base.html' %}
+
+
+{% load static %}
+
+
+{% load i18n %}
+
+
+{% block content %}
+<title>{% block title %}PAVSHOP - Product Detail{% endblock %}</title>
+
+  <!--======= SUB BANNER =========-->
+  <section class="sub-bnr" data-stellar-background-ratio="0.5">
+    <div class="position-center-center">
+      <div class="container">
+        <h4>WOOD CHAIR</h4>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec faucibus maximus vehicula. 
+          Sed feugiat, tellus vel tristique posuere, diam</p>
+        <ol class="breadcrumb">
+          <li><a href="#">Home</a></li>
+          <li class="active">Data</li>
+        </ol>
+      </div>
+    </div>
+  </section>
+  
+  <!-- Content -->
+  <div id="content"> 
+    
+    <!-- Popular Products -->
+    <section class="padding-top-100 padding-bottom-100">
+      <div class="container"> 
+        
+        <!-- SHOP DETAIL -->
+        <div class="shop-detail">
+          <div class="row"> 
+            
+            <!-- Popular Images Slider -->
+            <div class="col-md-7"> 
+              
+              <!-- Images Slider -->
+              <div class="images-slider">
+                <ul class="slides">
+                  
+                  {% for img in images %}
+                  <li data-thumb="{{ img.image.url }}"> <img class="img-responsive" src="{{ img.image.url }}"  alt="" style="width: 100%;"> </li>
+                  {% endfor %}
+                  <!-- <li data-thumb="{% static 'images/large-img-3.jpg' %}"> <img class="img-responsive" src="{% static 'images/large-img-3.jpg' %}"  alt=""> </li>
+                  <li data-thumb="{% static 'images/large-img-3.jpg' %}"> <img class="img-responsive" src="{% static 'images/large-img-3.jpg' %}"  alt=""> </li> -->
+                  
+
+                
+                </ul>
+              </div>
+            </div>
+            
+            <!-- COntent -->
+            <div class="col-md-5">
+              <h4>{{ products.title }}</h4>
+              <span class="price"><small>$</small>{{ products.money }}</span>
+              
+               {% if discounts.is_active is False %}
+               <span>No Discount</span>
+               {% else %}
+              <span class="price">Discount: {{products.apply_discount}}<small>$</small></span>
+               {% endif %}
+
+               
+
+              <!-- Sale Tags -->
+              {% if discounts.is_active %}
+                {% if discounts.is_percent is True %}
+                <div class="on-sale"> {{ discounts.value }} %<span>OFF</span> </div>
+                <!-- <div class="on-sale"> 10% <span>OFF</span> </div> -->
+                {% else %}
+                <div class="on-sale"> {{ discounts.value }} USD<span>OFF</span> </div>
+                {% endif %}
+              {% else %}
+              <div class="on-sale"> 0 % <span>OFF</span> </div>
+              {% endif %}
+
+
+              <ul class="item-owner">
+                <li>{% trans 'Category' %} :<span> {{ products.category.name }}</span></li>
+                
+                <li>{% trans 'Brand' %}:<span> {{ products.brand.name }} </span></li>
+                <!-- <li>Color:<span> {{ products.property_values.all }} </span></li> -->
+
+
+                
+              </ul>
+              
+              <!-- Item Detail -->
+              <p>{{ products.large_description }}</p>
+              
+              <!-- Short By -->
+              <div class="some-info">
+                <ul class="row margin-top-30">
+                  <li class="col-xs-4">
+                    <div class="quinty"> 
+                      <!-- QTY -->
+                      
+                      <!-- <select class="selectpicker">
+                         {% if products.quantity %}
+                            {% for i in products.get_quantity %}
+                            <option value="{{ choice.1 }}">{{ i }}</option>
+                            {% endfor %}
+                        {% else %}
+                        <option>No stock</option>
+                        {% endif %}
+                        
+                
+                      </select> -->
+                    </div>
+                  </li>
+                  
+                  <!-- COLORS -->
+                  <li class="col-xs-8">
+                    <ul class="colors-shop">
+                      <li><span class="margin-right-20">Colors</span></li>
+                     {% for i in products.property_values.all %}
+                      
+                      <li><a href="{% url 'product_list_page' %}?color={{i}}" style="background:{{i}};"></a>{{i.name}}</li>
+                    {% endfor %}
+                      <!-- <li><a href="#." style="background:#c9a688;"></a></li>
+                      <li><a href="#." style="background:#c9c288;"></a></li>
+                      <li><a href="#." style="background:#a7c988;"></a></li>
+                      <li><a href="#." style="background:#9ed66b;"></a></li>
+                      <li><a href="#." style="background:#6bd6b1;"></a></li>
+                      <li><a href="#." style="background:#82c2dc;"></a></li>
+                      <li><a href="#." style="background:#8295dc;"></a></li> -->
+                      
+                    </ul>
+                  </li>
+                  
+                  {% if products.in_stock is True %}
+                  <!-- ADD TO CART -->
+                  <div class="action" >
+                    <!-- <button id="add-to-basket" data="{{object.id}}"  type="button" class="btn add-btn btn-cart"><li>{% trans 'ADD TO CART' %}</li></button> -->
+                    <!-- <li class="col-xs-6"> <a href="#." class="btn update-cart">ADD TO CART</a> </li> -->
+                    <button data-product="{{products.id}}" data-action="add" class="btn btn-outline-secondary add-btn update-cart">Add to Cart</button>
+
+                  </div>
+                  {% else %}
+                  <h3>Product Not in stock!!!</h3>
+
+                  <div class="action" >
+                    <!-- <button id="add-to-basket" data="{{object.id}}"  type="button" class="btn add-btn btn-cart"><li>{% trans 'ADD TO CART' %}</li></button> -->
+                    <!-- <li class="col-xs-6"> <a href="#." class="btn update-cart">ADD TO CART</a> </li> -->
+                    <button data-product="{{products.id}}" data-action="add" class="btn btn-outline-secondary add-btn update-cart" disabled>Add to Cart</button>
+
+                  </div>
+
+                  {% endif %}
+                  
+                  
+                  <!-- LIKE -->
+                  <!-- <li class="col-xs-6"> <a href="#." class="like-us"><i class="icon-heart"></i></a> </li> -->
+                </ul>
+                
+                <!-- INFOMATION -->
+                <div class="inner-info">
+                  <h6>{% trans 'DELIVERY INFORMATION' %}</h6>
+                  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum finibus ligula a scelerisque gravida. Nullam laoreet tortor ac maximus alique met, consectetur adipiscing elit. </p>
+                  <!-- <h6>SHIPPING & RETURNS</h6> -->
+                  <br>
+
+                  <li class="dropdown"> <a href="#." class="dropdown-toggle" data-toggle="dropdown">{% trans 'SHIPPING & RETURNS' %}</a>
+                    <ul class="dropdown-menu">
+                      <li>For shipping details, please, visit <strong><a href="{% url 'checkout_page' %}">Checkout</a></strong> page</li>
+                      
+                      <li style="color: black;" > Info: <b>NO RETURN NO REFUND</b></li>
+                    </ul>
+                  </li>
+                  <!-- <p>For shipping details, please, visit <strong><a href="{% url 'checkout_page' %}">Checkout</a></strong> page</p> -->
+                  <h6>{% trans 'SHARE THIS PRODUCT' %}</h6>
+                  
+                  <!-- Social Icons -->
+                  <ul class="social_icons">
+                    <li><a href="#."><i class="icon-social-facebook"></i></a></li>
+                    <li><a href="#."><i class="icon-social-twitter"></i></a></li>
+                    <li><a href="#."><i class="icon-social-tumblr"></i></a></li>
+                    <li><a href="#."><i class="icon-social-youtube"></i></a></li>
+                    <li><a href="#."><i class="icon-social-dribbble"></i></a></li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <!--======= PRODUCT DESCRIPTION =========-->
+        <div class="item-decribe"> 
+          <!-- Nav tabs -->
+          <ul class="nav nav-tabs animate fadeInUp" data-wow-delay="0.4s" role="tablist">
+            <li role="presentation" class="active"><a href="#descr" role="tab" data-toggle="tab">{% trans 'DESCRIPTION' %}</a></li>
+            <li role="presentation"><a href="#review" role="tab" data-toggle="tab">{% trans 'REVIEW' %} ( {{ comments_count }} )</a></li>
+            <!-- <li role="presentation"><a href="#tags" role="tab" data-toggle="tab">INFORMATION</a></li> -->
+          </ul>
+          
+          <!-- Tab panes -->
+          <div class="tab-content animate fadeInUp" data-wow-delay="0.4s"> 
+            <!-- DESCRIPTION -->
+            <div role="tabpanel" class="tab-pane fade in active" id="descr">
+              <p>{% trans 'Small description:' %}</p>
+              <p>{{ products.small_description }} <br>
+              </p>
+              <h6>{% trans 'Availability' %} </h6>
+              <ul>
+                {% if products.in_stock %}
+                <li><strong>{% trans 'In stock' %} &#x2705;</strong></li>
+                <!-- {{ products.quantity }} -->
+                {% else %}
+                <li style="color: red;">{% trans 'Not in stock' %}</li>
+                {% endif %}
+                
+                <!-- <li>
+                  <p>Praesent faucibus, leo vitae maximus dictum,</p>
+                </li>
+                <li>
+                  <p> Donec porta ut lectus </p>
+                </li>
+                <li>
+                  <p> Phasellus maximus velit id nisl</p>
+                </li>
+                <li>
+                  <p> Quisque a tellus et sapien aliquam sus</p>
+                </li>
+                <li>
+                  <p> Donec porta ut lectus </p>
+                </li>
+                <li>
+                  <p> Phasellus maximus velit id nisl</p>
+                </li> -->
+              </ul>
+            </div>
+            
+            <!-- REVIEW -->
+            <div role="tabpanel" class="tab-pane fade" id="review">
+              <h6>{{comments_count}} {% trans 'REVIEWS FOR SHIP YOUR IDEA' %}</h6>
+               
+            
+              {% for i in reviews %}
+              
+               {% if i.is_active %}
+              
+              <!-- REVIEW PEOPLE 1 -->
+              <div class="media">
+                <div class="media-left"> 
+                  <!--  Image -->
+                  <div class="avatar"> <a href="#"> <img style="width: 100%;" class="media-object" src="{{ i.author.get_avatar }}" alt=""> </a> </div>
+                </div>
+                <!--  Details -->
+                <div class="media-body">
+                  <p class="font-playfair">{{ i.review }}</p>
+                  <h6>{{ i.author.get_full_name }}<span class="pull-right">{{ i.created_at }}</span> </h6>
+                </div>
+              </div>
+              
+              {% elif i.is_active is False %}
+            
+              <div class="media">
+                <div class="media-left"> 
+                  <!--  Image -->
+                  <div class="avatar"> <a href="#"> <img style="width: 100%;" class="media-object" src="{{ i.author.get_avatar }}" alt=""> </a> </div>
+                </div>
+                <!--  Details -->
+                <div class="media-body">
+                  <!-- <p class="font-playfair">{{ i.review }}</p> -->
+                  <p><i>{% trans 'This review is deleted by site owner' %}</i></p>
+
+                  <h6>{{ i.author.get_full_name }}<span class="pull-right">{{ i.created_at }}</span> </h6>
+                </div>
+              </div>
+
+               
+              {% endif %}
+              {% endfor %}
+              <h6>Product rating: {{ products.average_rating }} <span class="fa fa-star color-star"></span> </h6>
+              
+              <!-- REVIEW PEOPLE 1 -->
+              
+              {% comment %}
+              <div class="media">
+                <div class="media-left"> 
+                  <!--  Image -->
+                  <div class="avatar"> <a href="#"> <img class="media-object" src="{% static 'images/avatar-2.jpg' %}" alt=""> </a> </div>
+                </div>
+                <!--  Details -->
+                <div class="media-body">
+                  <p class="font-playfair">“Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut
+                    labore et dolore magna aliqua.”</p>
+                  <h6>TYRION LANNISTER <span class="pull-right">MAY 10, 2016</span> </h6>
+                </div>
+              </div>
+              {% endcomment%}
+              
+              <!-- ADD REVIEW -->
+              {%  if user.is_authenticated %}
+              <h6 class="margin-t-40">{% trans 'ADD REVIEW' %}</h6>
+              <form method="POST">
+                {% csrf_token %}
+                <ul class="row">
+            
+                  <!-- <li class="col-sm-6"> -->
+                    <!-- <label> *NAME -->
+                      <!-- {{ form.name }} -->
+                      <!-- <input type="text" value="" placeholder="Write your name"> -->
+                    <!-- </label> -->
+                  <!-- </li> -->
+
+                  <!-- <li class="col-sm-6"> -->
+                    <!-- <label> *EMAIL -->
+                      <!-- {{ form.email }} -->
+                      <!-- {{ form.email.errors }} -->
+                      <!-- <input type="email" value="" placeholder="Write your email"> -->
+                    <!-- </label> -->
+                  <!-- </li> -->
+
+                  <li class="col-sm-12">
+                    <label> *{% trans 'YOUR REVIEW' %}
+                      {{ form.review }}
+                      <!-- <textarea placeholder="Write your review here"></textarea> -->
+                    </label>
+                  </li>
+                  <li class="col-sm-6"> 
+                    <!-- Rating Stars -->
+                    <div class="stars star-rating"> <span>YOUR RATING</span>
+
+                     
+                      
+                      
+                      <!-- <input type="radio" name="rating" value="5" required class="stars">
+                      <input type="radio" name="rating" value="4" required class="stars">
+                      <input type="radio" name="rating" value="3" required class="stars">
+                      <input type="radio" name="rating" value="2" required class="stars">
+                      <input type="radio" name="rating" value="1" required class="stars"> -->
+
+
+
+                      
+                    
+                      <!-- <i class="fa fa-star {% if products.average_rating > 0 %} checked {% endif %}" aria-hidden="true" class="stars"></i>
+                      <i class="fa fa-star {% if products.average_rating > 1 %} checked {% endif %}" aria-hidden="true" class="stars"></i>
+                      <i class="fa fa-star {% if products.average_rating > 2 %} checked {% endif %}" aria-hidden="true" class="stars"></i>
+                      <i class="fa fa-star {% if products.average_rating > 3 %} checked {% endif %}" aria-hidden="true" class="stars"></i>
+                      <i class="fa fa-star {% if products.average_rating > 4 %} checked {% endif %}" aria-hidden="true" class="stars"></i> -->
+                    
+
+                      <!-- <span title="{{products.average_rating}}/5"></span> -->
+                      <label class="star-label">
+                        <input type="radio" name="rating" value="1" class="stars">
+                        <i class="fa fa-star {% if products.average_rating > 0 %} checked {% endif %}"></i>
+                      </label>
+                      <label class="star-label">
+                        <input type="radio" name="rating" value="2" class="stars">
+                        <i class="fa fa-star {% if products.average_rating > 1 %} checked {% endif %}"></i>
+                      </label>
+                      <label class="star-label">
+                        <input type="radio" name="rating" value="3" class="stars">
+                        <i class="fa fa-star {% if products.average_rating > 2 %} checked {% endif %}"></i>
+                      </label>
+                      <label class="star-label">
+                        <input type="radio" name="rating" value="4" class="stars">
+                        <i class="fa fa-star {% if products.average_rating > 3 %} checked {% endif %}"></i>
+                      </label>
+                      <label class="star-label">
+                        <input type="radio" name="rating" value="5" class="stars">
+                        <i class="fa fa-star {% if products.average_rating > 4 %} checked {% endif %}"></i>
+                      </label>
+                      <!-- Add more label elements for additional stars -->
+                    
+
+                      
+
+
+            <!-- <div class="star-rating">
+              <div class="star-rating__wrap">
+                <input class="star-rating__input" id="star-rating-5" type="radio" name="rating" value="5">
+                <label class="star-rating__ico fa fa-star-o fa-lg" for="star-rating-5" title="5 out of 5 stars"></label>
+                <input class="star-rating__input" id="star-rating-4" type="radio" name="rating" value="4">
+                <label class="star-rating__ico fa fa-star-o fa-lg" for="star-rating-4" title="4 out of 5 stars"></label>
+                <input class="star-rating__input" id="star-rating-3" type="radio" name="rating" value="3">
+                <label class="star-rating__ico fa fa-star-o fa-lg" for="star-rating-3" title="3 out of 5 stars"></label>
+                <input class="star-rating__input" id="star-rating-2" type="radio" name="rating" value="2">
+                <label class="star-rating__ico fa fa-star-o fa-lg" for="star-rating-2" title="2 out of 5 stars"></label>
+                <input class="star-rating__input" id="star-rating-1" type="radio" name="rating" value="1">
+                <label class="star-rating__ico fa fa-star-o fa-lg" for="star-rating-1" title="1 out of 5 stars"></label>
+              </div>
+            </div> -->
+
+                    
+                    </div>
+
+                  </li>
+                  <li class="col-sm-6">
+                    <button type="submit" class="btn btn-dark btn-small pull-right no-margin">{% trans 'POST REVIEW' %}</button>
+                  </li>
+                </ul>
+              </form>
+              {% else %}
+                  <p>You are not logged in. Please, <a href="{% url 'login_page' %}">Login your account</a> or <a href="{% url 'register_page' %}">Register here</a>, and write your comment here...</p>
+              {% endif %}
+            </div>
+            
+            <!-- TAGS -->
+            <div role="tabpanel" class="tab-pane fade" id="tags"> </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    
+    <!-- Popular Products -->
+    <section class="light-gray-bg padding-top-150 padding-bottom-150">
+      <div class="container"> 
+        
+        <!-- Main Heading -->
+        <div class="heading text-center">
+          <h4>{% trans 'YOU MAY LIKE IT' %}</h4>
+          <span>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec faucibus maximus vehicula. 
+          Sed feugiat, tellus vel tristique posuere, diam</span> </div>
+        
+        <!-- Popular Item Slide -->
+        <div class="papular-block block-slide single-img-demos"> 
+          
+          {% for i in all_products %}
+          <!-- Item -->
+          <div class="item"> 
+            <!-- Item img -->
+            <div class="item-img"> <img class="img-1" src="{{ i.image.url }}" alt="" > 
+              <!-- Overlay -->
+              <div class="overlay">
+                <div class="position-center-center">
+                  <div class="inn"><a href="#" data-lighter><i class="icon-magnifier"></i></a> <a href="#."><i class="icon-basket"></i></a> <a href="#." ><i class="icon-heart"></i></a></div>
+                </div>
+              </div>
+            </div>
+            <!-- Item Name -->
+            <div class="item-name"> <a href="{{i.get_absolute_url}}">{{ i.title }}</a>
+              <p>{{ i.small_description|safe|truncatewords:'20'|linebreaks }}</p>
+            </div>
+            <!-- Price --> 
+            <span class="price"><small></small>{{ i.money }}</span> </div>
+            {% endfor %}
+
+          
+          <!-- Item -->
+          <!-- <div class="item">  -->
+            <!-- Item img -->
+            <!-- <div class="item-img"> <img class="img-1" src="{% static 'images/product-2.jpg' %}" alt="" >  -->
+              <!-- Overlay -->
+              <!-- <div class="overlay">
+                <div class="position-center-center">
+                  <div class="inn"><a href="{% static 'images/product-2.jpg' %}" data-lighter><i class="icon-magnifier"></i></a> <a href="#."><i class="icon-basket"></i></a> <a href="#." ><i class="icon-heart"></i></a></div>
+                </div>
+              </div>
+            </div> -->
+            <!-- Item Name -->
+            <!-- <div class="item-name"> <a href="#.">gray bag</a>
+              <p>Lorem ipsum dolor sit amet</p>
+            </div> -->
+            <!-- Price --> 
+            <!-- <span class="price"><small>$</small>299</span> </div> -->
+          
+          <!-- Item -->
+          <!-- <div class="item">  -->
+            <!-- Item img -->
+            <!-- <div class="item-img"> <img class="img-1" src="{% static 'images/product-3.jpg' %}" alt="" >  -->
+              <!-- Overlay -->
+              <!-- <div class="overlay">
+                <div class="position-center-center">
+                  <div class="inn"><a href="{% static 'images/product-3.jpg' %}" data-lighter><i class="icon-magnifier"></i></a> <a href="#."><i class="icon-basket"></i></a> <a href="#." ><i class="icon-heart"></i></a></div>
+                </div>
+              </div>
+            </div> -->
+            <!-- Item Name -->
+            <!-- <div class="item-name"> <a href="#.">chiar</a>
+              <p>Lorem ipsum dolor sit amet</p>
+            </div> -->
+            <!-- Price --> 
+            <!-- <span class="price"><small>$</small>299</span> </div> -->
+          
+          <!-- Item -->
+          <!-- <div class="item">  -->
+            <!-- Item img -->
+            <!-- <div class="item-img"> <img class="img-1" src="{% static 'images/product-4.jpg' %}" alt="" >  -->
+              <!-- Overlay -->
+              <!-- <div class="overlay">
+                <div class="position-center-center">
+                  <div class="inn"><a href="{% static 'images/product-4.jpg' %}" data-lighter><i class="icon-magnifier"></i></a> <a href="#."><i class="icon-basket"></i></a> <a href="#." ><i class="icon-heart"></i></a></div>
+                </div>
+              </div>
+            </div> -->
+            <!-- Item Name -->
+            <!-- <div class="item-name"> <a href="#.">STool</a>
+              <p>Lorem ipsum dolor sit amet</p>
+            </div> -->
+            <!-- Price --> 
+            <!-- <span class="price"><small>$</small>299</span> </div> -->
+        <!-- </div> -->
+      </div>
+    </section>
+    
+    <!-- About -->
+    <section class="small-about padding-top-150 padding-bottom-150">
+      <div class="container"> 
+        
+        <!-- Main Heading -->
+        <div class="heading text-center">
+          <h4>{% trans 'about PAVSHOP' %}</h4>
+          <p>Phasellus lacinia fermentum bibendum. Interdum et malesuada fames ac ante ipsumien lacus, eu posuere odio luctus non. Nulla lacinia,
+            eros vel fermentum consectetur, risus purus tempc, et iaculis odio dolor in ex. </p>
+        </div>
+        
+        <!-- Social Icons -->
+        <ul class="social_icons">
+          <li><a href="#."><i class="icon-social-facebook"></i></a></li>
+          <li><a href="#."><i class="icon-social-twitter"></i></a></li>
+          <li><a href="#."><i class="icon-social-tumblr"></i></a></li>
+          <li><a href="#."><i class="icon-social-youtube"></i></a></li>
+          <li><a href="#."><i class="icon-social-dribbble"></i></a></li>
+        </ul>
+      </div>
+    </section>
+    
+
+
+{% endblock %}
+

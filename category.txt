@@ -1,0 +1,13 @@
+{% for story in story_count %}
+                <li><a href="?category={{story.name}}"> {{ story.name }} <span> {{ story.num_storys }} </span></a></li>
+                <!-- <li><a href="#."> Bag <span>122</span></a></li>
+                <li><a href="#."> Soffa <span>09</span></a></li>
+                <li><a href="#."> Bed <span>12</span></a></li>
+                <li><a href="#."> Shoes <span>98</span></a></li>
+                <li><a href="#."> Table <span>34</span></a></li>
+                <li><a href="#."> Bedsheets <span>23</span></a></li>
+                <li><a href="#."> Curtains <span>43</span></a></li>
+                <li><a href="#."> TV Cabinets <span>12</span></a></li>
+                <li><a href="#."> Clocks <span>18</span></a></li>
+                <li><a href="#."> Towels <span>25</span></a></li> -->
+                {% endfor %}

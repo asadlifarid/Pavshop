@@ -1,0 +1,88 @@
+<div id="content"> 
+    
+    <!--======= CONTACT  =========-->
+    <section class="contact padding-top-100 padding-bottom-100">
+      <div class="container">
+        <div class="container">
+          <h5>PLEASE fill-up FEW details</h5>
+          <div class="row">
+            <div class="col-md-8"> 
+              
+              <!--======= Success Msg =========-->
+              <!-- <div id="contact_message" class="success-msg"> <i class="fa fa-paper-plane-o"></i>Thank You. Your Message has been Submitted</div> -->
+              
+              <!--======= FORM  =========-->
+              <!--   onSubmit="return false"   -> olanda form tag'da submit button islemir  -->
+              <form  method="POST" enctype="multipart/form-data">
+                
+                {% csrf_token %}
+                <ul class="row">
+                  {{ storyform.as_p }}
+                  {{ storyform.media }}
+                  <!-- <li class="col-sm-6">
+                    <label>Title *
+                      
+                      {{ storyform.title }}
+                    </label>
+                  </li>
+                  
+                  <li class="col-sm-6">
+                    <label>Description *
+                     
+                      {{ storyform.description }}
+                    </label>
+                  </li>
+
+
+                  <li class="col-sm-6">
+                    <label>Category *
+                      
+                      {{ storyform.category }}
+                      
+                    </label>
+                  </li>
+
+
+                  <li class="col-sm-6">
+                    <label>Content *
+                     
+                      {{ storyform.content }}
+                      
+                    </label>
+                  </li>
+                  
+
+                  <li class="col-sm-12">
+                    <label>Image *
+                     
+                      {{ storyform.image }}
+                    </label>
+                  </li> -->
+                  <li class="col-sm-12">
+                    <button type="submit" value="submit" class="btn" id="btn_submit" onClick="proceed();">Create Story</button>
+                  </li>
+
+                  
+                </ul>
+              </form>
+
+            </div>
+            
+            <!--======= ADDRESS INFO  =========-->
+            <div class="col-md-4">
+                <h6>User Profile</h6>
+            
+                <div class="col-md-3 border-right">
+                    <div class="d-flex flex-column align-items-center text-center p-3 py-5"><img class="rounded-circle mt-5" width="150px" src="{{ request.user.get_avatar }}"><span class="font-weight-bold">{{ request.user.first_name }}</span>
+                        <span class="font-weight-bold">{{ request.user.last_name }}</span>
+                        <br>
+                        <span class="text-black-50">{{ request.user.email }}</span>
+                    </div>
+                </div>
+                
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </section>

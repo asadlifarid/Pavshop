@@ -1,0 +1,297 @@
+{% extends 'base.html' %}
+
+
+{% load static %}
+
+{% load i18n %}
+
+{% block content %}
+
+<title>{% block title %}PAVSHOP - Shopping Cart Page{% endblock %}</title>
+
+
+
+  <!--======= SUB BANNER =========-->
+  <section class="sub-bnr" data-stellar-background-ratio="0.5">
+    <div class="position-center-center">
+      <div class="container">
+        <h4>{% trans 'SHOPPING CART' %}</h4>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec faucibus maximus vehicula. 
+          Sed feugiat, tellus vel tristique posuere, diam</p>
+        <ol class="breadcrumb">
+          <li><a href="{% url 'home' %}">Home</a></li>
+          <li><a href="{% url 'home' %}">SHOP</a></li>
+          <li class="active">SHOPPING CART</li>
+        </ol>
+      </div>
+    </div>
+  </section>
+  
+  <!-- Content -->
+  <div id="content"> 
+    
+    <!--======= PAGES INNER =========-->
+    <section class="padding-top-100 padding-bottom-100 pages-in chart-page">
+      <div class="container"> 
+        
+        <!-- Payments Steps -->
+        <div class="shopping-cart text-center">
+          <div class="cart-head">
+            <ul class="row">
+              <!-- PRODUCTS -->
+              <li class="col-sm-2 text-left">
+                <h6>{% trans 'PRODUCTS' %}</h6>
+              </li>
+              <!-- NAME -->
+              <li class="col-sm-4 text-left">
+                <h6>{% trans 'NAME' %}</h6>
+              </li>
+              <!-- PRICE -->
+              <li class="col-sm-2">
+                <h6>{% trans 'PRICE' %}</h6>
+              </li>
+              <!-- QTY -->
+              <li class="col-sm-1">
+                <h6>{% trans 'QTY' %}</h6>
+              </li>
+              
+              <!-- TOTAL PRICE -->
+              <li class="col-sm-2">
+                <h6>{% trans 'TOTAL' %}</h6>
+              </li>
+              <li class="col-sm-1"> </li>
+            </ul>
+          </div>
+          
+          <!-- Cart Details -->
+
+          {% for item in items %}
+          <ul class="row cart-details">
+            <li class="col-sm-6">
+              <div class="media"> 
+                <!-- Media Image -->
+                <div class="media-left media-middle"> <a href="#." class="item-img"> <img class="media-object" src="{{ item.product.image.url }}" alt=""> </a> </div>
+                
+                <!-- Item Name -->
+                <div class="media-body">
+                  <div class="position-center-center">
+                    <h5>{{ item.product.title }}</h5>
+                    <p>{{ item.small_description|safe|truncatewords:'20'|linebreaks }}</p>
+                  </div>
+                </div>
+              </div>
+            </li>
+            
+            <!-- PRICE -->
+            <li class="col-sm-2">
+              <div class="position-center-center"> <span class="price"><small>$</small>{{ item.product.money }}</span> </div>
+            </li>
+            
+            <!-- QTY -->
+            <li class="col-sm-1">
+              <div class="position-center-center">
+                <div class="quinty"> 
+                  <!-- QTY -->
+                  <p>{{ item.quantity }}</p>
+                  <!-- <select class="selectpicker">
+                    {% if item.product.quantity %}
+                        {% for i in item.product.get_quantity %}
+                            <option value="{{ choice.1 }}">{{ i }}</option>
+                        {% endfor %}
+                    {% else %}
+                        <option>No stock</option>
+                    {% endif %}
+                    
+                  </select> -->
+                </div>
+              </div>
+            </li>
+            
+            <!-- TOTAL PRICE -->
+            <li class="col-sm-2">
+              <div class="position-center-center"> <span class="price"><small>$</small>{{ item.get_total }}</span> </div>
+            </li>
+            
+            <!-- REMOVE -->
+            <li class="col-sm-1">
+              <div class="quantity">
+                <img data-product="{{item.product.id}}" data-action="add" class="chg-quantity update-cart" src="{% static  'images/arrows/arrow-up.png' %}">
+            
+                <img data-product="{{item.product.id}}" data-action="remove" class="chg-quantity update-cart" src="{% static  'images/arrows/arrow-down.png' %}">
+              </div>
+
+
+              <!-- <div class="position-center-center" data-product={{item.product.id}} data-action="remove" class="chg-quantity update-cart"> <a href=""><i class="icon-close"></i></a> </div> -->
+            </li>
+          </ul>
+          {% endfor %}
+          
+
+
+          {% comment %}
+          <!-- Cart Details -->
+          <ul class="row cart-details">
+            <li class="col-sm-6">
+              <div class="media"> 
+                <!-- Media Image -->
+                <div class="media-left media-middle"> <a href="#." class="item-img"> <img class="media-object" src="{% static 'images/cart-img-2.jpg' %}" alt=""> </a> </div>
+                
+                <!-- Item Name -->
+                <div class="media-body">
+                  <div class="position-center-center">
+                    <h5>STOOL</h5>
+                    <p>Lorem ipsum dolor sit amet</p>
+                  </div>
+                </div>
+              </div>
+            </li>
+            
+            <!-- PRICE -->
+            <li class="col-sm-2">
+              <div class="position-center-center"> <span class="price"><small>$</small>299</span> </div>
+            </li>
+            
+            <!-- QTY -->
+            <li class="col-sm-1">
+              <div class="position-center-center">
+                <div class="quinty"> 
+                  <!-- QTY -->
+                  <select class="selectpicker">
+                    <option>1</option>
+                    <option>2</option>
+                    <option>3</option>
+                  </select>
+                </div>
+              </div>
+            </li>
+            
+            <!-- TOTAL PRICE -->
+            <li class="col-sm-2">
+              <div class="position-center-center"> <span class="price"><small>$</small>299</span> </div>
+            </li>
+            
+            <!-- REMOVE -->
+            <li class="col-sm-1">
+              <div class="position-center-center"> <a href="#."><i class="icon-close"></i></a> </div>
+            </li>
+          </ul>
+          
+          <!-- Cart Details -->
+          <ul class="row cart-details">
+            <li class="col-sm-6">
+              <div class="media"> 
+                <!-- Media Image -->
+                <div class="media-left media-middle"> <a href="#." class="item-img"> <img class="media-object" src="{% static 'images/cart-img-3.jpg' %}" alt=""> </a> </div>
+                
+                <!-- Item Name -->
+                <div class="media-body">
+                  <div class="position-center-center">
+                    <h5>wood SPOON</h5>
+                    <p>Lorem ipsum dolor sit amet</p>
+                  </div>
+                </div>
+              </div>
+            </li>
+            
+            <!-- PRICE -->
+            <li class="col-sm-2">
+              <div class="position-center-center"> <span class="price"><small>$</small>299</span> </div>
+            </li>
+            
+            <!-- QTY -->
+            <li class="col-sm-1">
+              <div class="position-center-center">
+                <div class="quinty"> 
+                  <!-- QTY -->
+                  <select class="selectpicker">
+                    <option>1</option>
+                    <option>2</option>
+                    <option>3</option>
+                  </select>
+                </div>
+              </div>
+            </li>
+            
+            <!-- TOTAL PRICE -->
+            <li class="col-sm-2">
+              <div class="position-center-center"> <span class="price"><small>$</small>299</span> </div>
+            </li>
+            
+            <!-- REMOVE -->
+            <li class="col-sm-1">
+              <div class="position-center-center"> <a href="#."><i class="icon-close"></i></a> </div>
+            </li>
+          </ul>
+          {% endcomment %}
+        </div>
+      </div>
+    </section>
+    
+    <!--======= PAGES INNER =========-->
+    <section class="padding-top-100 padding-bottom-100 light-gray-bg shopping-cart small-cart">
+      <div class="container"> 
+        
+        <!-- SHOPPING INFORMATION -->
+        <div class="cart-ship-info margin-top-0">
+          <div class="row"> 
+            
+            <!-- DISCOUNT CODE -->
+            <div class="col-sm-7">
+              <h6>Enjoy shopping!</h6>
+              <!-- <h6>{% trans 'DISCOUNT CODE' %}</h6>
+              <form>
+                <input type="text" value="" placeholder="ENTER YOUR CODE IF YOU HAVE ONE">
+                <button type="submit" class="btn btn-small btn-dark">{% trans 'APPLY CODE' %}</button>
+              </form>
+              <div class="coupn-btn"> <a href="#." class="btn">{% trans 'continue shopping' %}</a> <a href="#." class="btn">{% trans 'update cart' %}</a> </div> -->
+            </div>
+            
+            <!-- SUB TOTAL -->
+            <div class="col-sm-5">
+              <h6>{% trans 'grand total' %}</h6>
+              <div class="grand-total">
+                <div class="order-detail">
+                  {% for item in items %}
+                  <p>{{ item.product.title }} <span>${{ item.get_total }} </span></p>
+                  <!-- <p>STOOL <span>$199 </span></p>
+                  <p>WOOD SPOON <span> $139</span></p> -->
+                  {% endfor %}
+                  
+                  <!-- SUB TOTAL -->
+                  <p class="all-total">{% trans 'TOTAL COST' %} <span> ${{ order.get_grand_total }}</span></p>
+                  <p class="all-total"> Total quantity <span> {{ order.get_cart_items }}</span></p>
+
+                  
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    
+    <!-- About -->
+    <section class="small-about padding-top-150 padding-bottom-150">
+      <div class="container"> 
+        
+        <!-- Main Heading -->
+        <div class="heading text-center">
+          <h4>{% trans 'about PAVSHOP' %}</h4>
+          <p>Phasellus lacinia fermentum bibendum. Interdum et malesuada fames ac ante ipsumien lacus, eu posuere odio luctus non. Nulla lacinia,
+            eros vel fermentum consectetur, risus purus tempc, et iaculis odio dolor in ex. </p>
+        </div>
+        
+        <!-- Social Icons -->
+        <ul class="social_icons">
+          <li><a href="#."><i class="icon-social-facebook"></i></a></li>
+          <li><a href="#."><i class="icon-social-twitter"></i></a></li>
+          <li><a href="#."><i class="icon-social-tumblr"></i></a></li>
+          <li><a href="#."><i class="icon-social-youtube"></i></a></li>
+          <li><a href="#."><i class="icon-social-dribbble"></i></a></li>
+        </ul>
+      </div>
+    </section>
+    
+
+
+{% endblock %}
